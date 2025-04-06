@@ -39,12 +39,17 @@ func main() {
 	doc.Find("div.Card_container__Ng56K").Each(func(i int, p *goquery.Selection) {
 		card := Card{}
 		card.Name = p.Find("span.Card_name__Mpa7S").Text()
-		src, exist := p.Find("div .CardImage_container__4_PKo").Attr("class")
-		fmt.Println(src)
-		if exist {
-			fmt.Println(src)
-			card.Image = src
-		}
+		// cardImageInfo := p.Find("a")
+
+		links := doc.Find("a").Map(func(i int, a *goquery.Selection) string {
+			link, _ := a.Attr("href")
+			return link
+		})
+		fmt.Println(links)
+		// if exist {
+		// 	fmt.Println(src)
+		// 	card.Image = src
+		// }
 		// fmt.Println(card)
 	})
 }
